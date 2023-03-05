@@ -40,6 +40,12 @@ class Customer(models.Model):
     birthday = models.DateField(null=True) #only includes date, not time
     membership = models.CharField( max_length=1, choices=MEMBERSHIP_CHOICES, default=MEMBERSHIP_BRONZE)
     
+    class Meta:
+        db_table = 'store_customers'
+        indexes = [
+        models.Index(fields=['last_name', 'first_name']),
+        ]
+    
 class Address(models.Model):
     zip = models.CharField(max_length=6)
     street = models.CharField(max_length=255)
